@@ -1,15 +1,30 @@
 # Input formatting program for Loquela
 import re
 
-text = open('gerw2.txt', 'r', encoding='utf-16').read()
-text = re.sub(r'\s{2,}', '___', text)
-result = ''
-text = text.replace(',', '')
-text = re.split(r'(___|\n)', text)
-text = [el for el in text if el != '___' and el != '\n' and el != '']
+def format():	
+	filePath = str(input('Enter file to format: '))
+	try:
+		text = open(filePath, 'r', encoding='utf-16').read()
+	except:
+		print('Wrong file path given')
+		return 'Error occurred'
 
-for i in range(0, len(text) - 1, 2):
-	result += text[i] + "#" + text[i + 1] + ','
+	text = re.sub(r'\s{2,}', '___', text)
+	result = ''
+	text = text.replace(',', '')
+	text = re.split(r'(___|\n)', text)
+	text = [el for el in text if el != '___' and el != '\n' and el != '']
 
-result = result[:-1]
-print(result)
+	for i in range(0, len(text) - 1, 2):
+		result += text[i] + "#" + text[i + 1] + ','
+
+	result = result[:-1]
+	print(result)
+	return 'Success'
+
+call = format()
+if call != 'Success':
+	while call != 'Success':
+		call = format()
+
+	
