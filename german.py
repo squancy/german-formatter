@@ -1,7 +1,7 @@
 # Input formatting program for Loquela
 import re
 
-def format():	
+def format():
 	filePath = str(input('Enter file to format: '))
 	try:
 		text = open(filePath, 'r', encoding='utf-16').read()
@@ -10,6 +10,8 @@ def format():
 		return 'Error occurred'
 
 	text = re.sub(r'\s{2,}', '___', text)
+	# remove example sentences
+	text = re.sub(r'[A-Z][a-z ]*\w*(\.|\?|\!)', '', text)
 	result = ''
 	text = text.replace(',', '')
 	text = re.split(r'(___|\n)', text)
